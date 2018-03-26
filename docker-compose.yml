@@ -1,0 +1,13 @@
+version: '2'
+services:
+    mysql:
+        container_name: body101_mongodb
+        image: mongo
+        ports:
+            - "27017:27017"
+        networks:
+            - app_network
+
+networks:
+    app_network:
+        driver: bridge
