@@ -8,20 +8,29 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/biodunch/body101.git"
+    "url": "git+https://github.com/biodunch/body101-MW.git"
   },
   "author": "Biodun Chris",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/biodunch/body101/issues"
+    "url": "https://github.com/biodunch/body101-MW/issues"
   },
-  "homepage": "https://github.com/biodunch/body101#readme",
+  "homepage": "https://github.com/biodunch/body101-MW#readme",
   "dependencies": {
+    "custom-error-generator": "^7.0.0",
     "debug": "^3.1.0",
     "dotenv": "^5.0.1",
+    "http-status": "^1.0.1",
     "joi": "^13.1.2",
     "mongoose": "^5.0.11",
     "restify": "^7.0.0",
-    "restify-errors": "^6.0.0"
+    "restify-errors": "^6.0.0",
+    "restify-url-semver": "^1.1.1",
+    "service-locator": "^1.0.0",
+    "shortid": "^2.2.8",
+    "winston": "^3.0.0-rc3"
+  },
+  "devDependencies": {
+    "cli-table": "^0.3.1"
   }
 }

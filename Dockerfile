@@ -14,12 +14,12 @@ RUN npm install
 # copy everything from current directory to src
 COPY . /src
 
-RUN npm i -g nodemon
+RUN npm install -g nodemon
 
 # map a volume to override the code
 VOLUME [ "/src" ]
 
 # Expose web service and nodejs debug port
-EXPOSE  8080 8585 9615
+EXPOSE  5000
 
-CMD ["bash"]
+CMD ["nodemon"]

@@ -1,13 +1,19 @@
 version: '2'
 services:
-    mysql:
+    mongo:
         container_name: body101_mongodb
         image: mongo
         ports:
             - "27017:27017"
-        networks:
-            - app_network
-
-networks:
-    app_network:
-        driver: bridge
+    app:
+        container_name: body101_web_app
+        build: .
+        env_file: .env
+        ports:
+            - "5000:5000"
+        volumes: 
+            - .:/src
+        links:
+            - mongo
+        depends_on:
+            - mongo
