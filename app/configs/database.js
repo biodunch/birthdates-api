@@ -1,17 +1,18 @@
 'use strict';
 
-const mongoose = require('mongoose')
+const serviceLocator = require("app/lib/service_locator");
 
 class Database {
 
     constructor(host, port, name){
+        this.mongoose = serviceLocator.get('mongoose');
         this._connect(host, port, name);
     }
 
     _connect(host, port, name) {
-        mongoose.Promise = global.Promise;
-        mongoose.connect(`mongodb://mongo:27017/${name}`);
-        const connection = mongoose.connection;
+        this.mongoose.Promise = global.Promise;
+        this.mongoose.connect(`mongodb://mongo:27017/${name}`);
+        const connection = this.mongoose.connection;
         connection.on('connected', () => console.log("Connection Successful"));  
         connection.on('error', (err) => console.log("Connection Failed" + err));  
         connection.on('disconnected', () => console.log("Connection Disconnected")); 

@@ -3,6 +3,7 @@
 var winston = require('winston');
 var fs = require('fs');
 
+try {
 /**
  * Function responsible for formatting the log lines.
  * @param entry the log entry to format
@@ -93,3 +94,6 @@ module.exports = {
         });
     }
 };
+} catch(err) {
+    console.log(err)
+}

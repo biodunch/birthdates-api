@@ -1,26 +1,26 @@
 'use strict';
 
-const config = require('app/configs/configs')(),
-    restify = require('restify'),
-    versioning = require('restify-url-semver'),
-    joi = require('joi'),
+const config        = require('app/configs/configs')(),
+    restify         = require('restify'),
+    versioning      = require('restify-url-semver'),
+    joi             = require('joi'),
 
     // Require DI
-    serviceLocator = require('app/configs/di'),
-    validator = require('app/lib/validator'),
-    handler = require('app/routes/handlers'),
-    routes = require('app/routes/routes'),
-    logger = serviceLocator.get('logger'),
-    server = restify.createServer({
-        name: config.app.name,
-        versions: ['1.0.0'],
-        formatters: {
-            'application/json': require('app/lib/formatters/jsend')
-        }
-    }),
+    serviceLocator  = require('app/configs/di'),
+    validator       = require('app/lib/validator'),
+    handler         = require('app/routes/handlers'),
+    routes          = require('app/routes/routes'),
+    logger          = serviceLocator.get('logger'),
+    server          = restify.createServer({
+                                name: config.app.name,
+                                versions: ['1.0.0'],
+                                formatters: {
+                                    'application/json': require('app/lib/formatters/jsend')
+                                }
+                            }),
 
     // require and initialize the database
-    Database = require('app/configs/database');
+    Database        = require('app/configs/database');
     new Database(config.mongo.port, config.mongo.host, config.mongo.name);
 
 // Set API versioning and allow trailing slashes
@@ -34,8 +34,8 @@ server.use(restify.plugins.bodyParser({
     mapParams: false
 }));
 
-
-server.use(validator.paramValidation(logger, joi)); // verification for request parameters
+// initialize validator for all requests
+server.use(validator.paramValidation(logger, joi)); 
 server.use(validator.headerValidation(logger)); 
 
 // Setup Error Event Handling
@@ -51,4 +51,8 @@ server.listen(config.app.port, () => {
     if (process.env.APPLICATION_ENV === 'development') {
         require('app/lib/route_tables')(server.getDebugInfo().routes);
     }
+});
+
+process.on('unhandledRejection', error => {
+    console.log(error);
 });

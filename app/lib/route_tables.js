@@ -19,7 +19,6 @@ try{
     console.log('**********************************************************\n');
 
     for (const key of routes) {
-        console.log(key);
         // if (routes.hasOwnProperty(key)) {
             let val = key;
             let row = {};
