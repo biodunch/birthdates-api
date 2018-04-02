@@ -54,5 +54,5 @@ server.listen(config.app.port, () => {
 });
 
 process.on('unhandledRejection', error => {
-    console.log(error);
+    logger.error(error);
 });

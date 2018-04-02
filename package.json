@@ -1,21 +1,21 @@
 {
   "name": "body101",
   "version": "1.0.0",
-  "description": "API for body101 website",
+  "description": "API for birth dates",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/biodunch/body101-MW.git"
+    "url": "git+https://github.com/biodunch/birthdates.git"
   },
   "author": "Biodun Chris",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/biodunch/body101-MW/issues"
+    "url": "https://github.com/biodunch/birthdates/issues"
   },
-  "homepage": "https://github.com/biodunch/body101-MW#readme",
+  "homepage": "https://github.com/biodunch/birthdates#readme",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "custom-error-generator": "^7.0.0",

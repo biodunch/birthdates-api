@@ -4,69 +4,61 @@
 
 "use strict";
 
-const verifyToken = require("app/middleware/verify_token"),
-    checkRole = require("app/middleware/check_role");
+const catchErrors = require("app/middleware/catch_errors");
 
 module.exports.register = (server, serviceLocator) => {
-
-    // Auth Routes
-    server.post(
-        {
-            path: "/users/basic-login",
-            name: "User Login",
-            version: "1.0.0"
-        },
-        serviceLocator.get('authController').basicLogin 
-    );
-
     server.post(
         {
             path: "/users",
             name: "Create User",
-            version: "1.0.0"
+            version: "1.0.0",
+            validation: {
+                body: require("app/validations/create_user")
+            }
         },
-        serviceLocator.get('authController').create
-    );
-
-    server.get(
-        {
-            path: "/users",
-            name: "Get Users",
-            version: "1.0.0"
-        },
-        serviceLocator.get('authController').listAll
+        (req, res, next) =>
+            catchErrors(
+                serviceLocator.get("userController").create(req, res, next)
+            )
     );
 
     server.get(
         {
             path: "/users/:username",
             name: "Get User",
-            version: "1.0.0",
-            validations: {
-                params
-            }
+            version: "1.0.0"
         },
-        serviceLocator.get('authController').get
+        (req, res, next) =>
+            catchErrors(
+                serviceLocator.get("userController").get(req, res, next)
+            )
     );
 
     server.get(
         {
-            path: "/show",
-            name: "GIRL",
+            path: "/birthdates/:username",
+            name: "Get Birthdates",
             version: "1.0.0"
         },
-        verifyToken,
-        (req, res, next) => res.send("welcome to Body101 api")
+        (req, res, next) =>
+            catchErrors(
+                serviceLocator
+                    .get("birthdateController")
+                    .listAll(req, res, next)
+            )
     );
 
-    server.get(
+    server.post(
         {
-            path: "/admin",
-            name: "Admin",
+            path: "/birthdates/:username",
+            name: "Create Birthdate",
             version: "1.0.0"
         },
-        verifyToken,
-        checkRole,
-        (req, res, next) => res.send("welcome to admin")
+        (req, res, next) =>
+            catchErrors(
+                serviceLocator
+                    .get("birthdateController")
+                    .listAll(req, res, next)
+            )
     );
 };

@@ -53,8 +53,7 @@ module.exports.paramValidation = function(log, joi) {
             allowUnknown: true
         };
 
-        let validation = req.route.validation; //validation object in route
-
+        let validation = req.route.spec.validation; //validation object in route
         if (!validation) {
             return next(); // skip validation if not set
         }

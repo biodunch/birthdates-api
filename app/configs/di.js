@@ -9,6 +9,10 @@ serviceLocator.register("logger", () => {
     return logger;
 });
 
+serviceLocator.register("httpStatus", () => {
+    return require("http-status");
+});
+
 serviceLocator.register("shortid", () => {
     return require("shortid");
 });
@@ -19,20 +23,46 @@ serviceLocator.register("mongoose", () => {
     return mongoose;
 });
 
-serviceLocator.register("jwt", () => {
-    const jwt = require("jsonwebtoken");
-
-    return jwt;
+serviceLocator.register("errs", () => {
+    return require("restify-errors");
 });
 
-serviceLocator.register('authController', () => {
-    const log = serviceLocator.get('logger');
-    const authService = '';
-    const httpStatus = require('http-status');
-    const AuthController = require('app/controllers/Auth')
+serviceLocator.register("birthdateService", (serviceLocator) => {
+    const log = serviceLocator.get("logger");
+    const mongoose = serviceLocator.get("mongoose");
+    const httpStatus = serviceLocator.get("httpStatus");
+    const errs = serviceLocator.get("errs");
+    const BirthdateService = require("app/services/birthdate");
 
-    return new AuthController(log, authService, httpStatus)
-})
+    return new BirthdateService(log, mongoose, httpStatus, errs);
+});
 
+serviceLocator.register("userService", (serviceLocator) => {
+    const log = serviceLocator.get("logger");
+    const mongoose = serviceLocator.get("mongoose");
+    const httpStatus = serviceLocator.get("httpStatus");
+    const errs = serviceLocator.get("errs");
+    const UserService = require("app/services/user");
+    
+    return new UserService(log, mongoose, httpStatus, errs);
+});
+
+serviceLocator.register("birthdateController", (serviceLocator) => {
+    const log = serviceLocator.get("logger");
+    const httpStatus = serviceLocator.get("httpStatus");
+    const birthdateService = serviceLocator.get("birthdateService");
+    const BirthdateController = require("app/controllers/Birthdate");
+
+    return new BirthdateController(log, birthdateService, httpStatus);
+});
+
+serviceLocator.register("userController", (serviceLocator) => {
+    const log = serviceLocator.get("logger");
+    const httpStatus = serviceLocator.get("httpStatus");
+    const userService = serviceLocator.get("userService");
+    const UserController = require("app/controllers/User");
+
+    return new UserController(log, userService, httpStatus);
+});
 
 module.exports = serviceLocator;

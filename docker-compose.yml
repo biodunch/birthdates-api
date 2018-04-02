@@ -1,12 +1,12 @@
 version: '2'
 services:
     mongo:
-        container_name: body101_mongodb
+        container_name: birthdates_mongodb
         image: mongo
         ports:
             - "27017:27017"
     app:
-        container_name: body101_web_app
+        container_name: birthdates_web_app
         build: .
         env_file: .env
         ports:
