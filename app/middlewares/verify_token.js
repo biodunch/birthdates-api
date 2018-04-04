@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-const jwt = require("app/lib/restify-jwt");
-const jwksClient = require("jwks-rsa");
-const config = require("app/configs/configs")();
+const jwt = require('app/lib/restify-jwt');
+const jwksClient = require('jwks-rsa');
+const config = require('app/configs/configs')();
 
 const verifyToken = jwt({
     secret: jwksClient.expressJwtSecret({
@@ -13,7 +13,7 @@ const verifyToken = jwt({
     }),
     audience: config.auth0.jwt_aud,
     issuer: config.auth0.jwt_issuer,
-    algorithms: ["RS256"]
+    algorithms: ['RS256']
 });
 
 module.exports = verifyToken;

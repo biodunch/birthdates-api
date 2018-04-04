@@ -4,7 +4,9 @@
   "description": "API for birth dates",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "linting": "node_modules/.bin/jscs .",
+    "fix-linting": "node_modules/.bin/jscs --fix"
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,7 @@
     "winston": "^3.0.0-rc3"
   },
   "devDependencies": {
-    "cli-table": "^0.3.1"
+    "cli-table": "^0.3.1",
+    "jscs": "^3.0.7"
   }
 }

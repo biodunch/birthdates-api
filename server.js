@@ -21,7 +21,7 @@ const config        = require('app/configs/configs')(),
 
     // require and initialize the database
     Database        = require('app/configs/database');
-    new Database(config.mongo.port, config.mongo.host, config.mongo.name);
+new Database(config.mongo.port, config.mongo.host, config.mongo.name);
 
 // Set API versioning and allow trailing slashes
 server.pre(restify.pre.sanitizePath());
@@ -35,8 +35,8 @@ server.use(restify.plugins.bodyParser({
 }));
 
 // initialize validator for all requests
-server.use(validator.paramValidation(logger, joi)); 
-server.use(validator.headerValidation(logger)); 
+server.use(validator.paramValidation(logger, joi));
+server.use(validator.headerValidation(logger));
 
 // Setup Error Event Handling
 handler.register(server);
@@ -53,6 +53,6 @@ server.listen(config.app.port, () => {
     }
 });
 
-process.on('unhandledRejection', error => {
+process.on('unhandledRejection', (error) => {
     logger.error(error);
 });

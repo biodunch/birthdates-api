@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 class BirthdateService {
     constructor(log, mongoose, httpStatus, errs) {
@@ -9,7 +9,7 @@ class BirthdateService {
     }
 
     async createBirthdate(username, body) {
-        const Users = this.mongoose.model("Users");
+        const Users = this.mongoose.model('Users');
         const user = await Users.findOne({ username });
         const { birthdate, fullname } = body;
 
@@ -33,7 +33,7 @@ class BirthdateService {
     }
 
     async getBirthdates(username) {
-        const Users = this.mongoose.model("Users");
+        const Users = this.mongoose.model('Users');
         const user = await Users.findOne({ username });
 
         if (!user) {

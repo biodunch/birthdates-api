@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const serviceLocator = require("app/lib/service_locator");
+const serviceLocator = require('app/lib/service_locator');
 
 class UserController {
     constructor(log, userService, httpSatus) {
@@ -13,8 +13,8 @@ class UserController {
         const { body } = req;
         const result = await this.userService.createUser(body);
         if (result instanceof Error)
-            this.log.info("An error occured creating user" + result);
-        else this.log.info("User Created Successfully");
+            this.log.info('An error occured creating user' + result);
+        else this.log.info('User Created Successfully');
         res.send(result);
     }
 
@@ -22,12 +22,11 @@ class UserController {
         const { username } = req.params;
         const result = await this.userService.getUser(username);
         if (result instanceof Error)
-            this.log.info("An error occured creating user" + result);
-        else this.log.info("User fetched Successfully");
+            this.log.info('An error occured creating user' + result);
+        else this.log.info('User fetched Successfully');
         res.send(result);
     }
 
-    async listAll(req, res) {}
 }
 
 module.exports = UserController;
