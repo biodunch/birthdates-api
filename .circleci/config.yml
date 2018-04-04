@@ -26,8 +26,8 @@ jobs:
       # run linting!
       - run: npm run linting
 
-      - deployment:
-          development:
-            branch: dev
-            heroku:
-              appname: birthdates-api
+  deployment:
+    development:
+      branch: dev
+      heroku:
+        appname: birthdates-api
