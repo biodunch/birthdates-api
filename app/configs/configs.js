@@ -8,6 +8,11 @@ module.exports = () => ({
         logpath: process.env.LOG_PATH,
         secret: process.env.APP_SECRET
     },
+    auth0: {
+        jwks_url: process.env.JWKS_URL,
+        jwt_aud: process.env.JWT_AUD,
+        jwt_issuer: process.env.JWT_ISSUER
+    },
     mongo: {
         port: process.env.DB_PORT,
         host: process.env.DB_HOST,
