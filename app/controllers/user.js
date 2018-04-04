@@ -18,7 +18,14 @@ class UserController {
         res.send(result);
     }
 
-    async get(req, res) {}
+    async get(req, res) {
+        const { username } = req.params;
+        const result = await this.userService.getUser(username);
+        if (result instanceof Error)
+            this.log.info("An error occured creating user" + result);
+        else this.log.info("User fetched Successfully");
+        res.send(result);
+    }
 
     async listAll(req, res) {}
 }

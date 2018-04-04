@@ -4,9 +4,10 @@
 
 "use strict";
 
-const catchErrors = require("app/middleware/catch_errors");
+const verifyToken = require("app/middlewares/verify_token");
 
 module.exports.register = (server, serviceLocator) => {
+
     server.post(
         {
             path: "/users",
@@ -17,48 +18,48 @@ module.exports.register = (server, serviceLocator) => {
             }
         },
         (req, res, next) =>
-            catchErrors(
-                serviceLocator.get("userController").create(req, res, next)
-            )
+            serviceLocator.get("userController").create(req, res, next)
     );
 
     server.get(
         {
             path: "/users/:username",
             name: "Get User",
-            version: "1.0.0"
+            version: "1.0.0",
+            validation: {
+                params: require("app/validations/get_user")
+            }
         },
+        verifyToken,
         (req, res, next) =>
-            catchErrors(
-                serviceLocator.get("userController").get(req, res, next)
-            )
+            serviceLocator.get("userController").get(req, res, next)
     );
 
     server.get(
         {
             path: "/birthdates/:username",
             name: "Get Birthdates",
-            version: "1.0.0"
+            version: "1.0.0",
+            validation: {
+                params: require("app/validations/get_birthdates")
+            }
         },
+        verifyToken,
         (req, res, next) =>
-            catchErrors(
-                serviceLocator
-                    .get("birthdateController")
-                    .listAll(req, res, next)
-            )
+            serviceLocator.get("birthdateController").get(req, res, next)
     );
 
     server.post(
         {
             path: "/birthdates/:username",
             name: "Create Birthdate",
-            version: "1.0.0"
+            version: "1.0.0",
+            validation: {
+                body: require("app/validations/create_birthdates")
+            }
         },
+        verifyToken,
         (req, res, next) =>
-            catchErrors(
-                serviceLocator
-                    .get("birthdateController")
-                    .listAll(req, res, next)
-            )
+            serviceLocator.get("birthdateController").create(req, res, next)
     );
 };

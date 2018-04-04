@@ -25,13 +25,13 @@ class UserService {
         return newUser.save();
     }
 
-    async get(username) {
+    async getUser(username) {
         const Users = this.mongoose.model("Users");
         const user = await Users.findOne({ username });
 
         if (!user) {
-            const err = new errs.NotFoundError(
-                "User with username doesn't exists"
+            const err = new this.errs.NotFoundError(
+                `User with username - ${username} does not exists`
             );
             return err;
         }

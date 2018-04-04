@@ -51,7 +51,7 @@ serviceLocator.register("birthdateController", (serviceLocator) => {
     const log = serviceLocator.get("logger");
     const httpStatus = serviceLocator.get("httpStatus");
     const birthdateService = serviceLocator.get("birthdateService");
-    const BirthdateController = require("app/controllers/Birthdate");
+    const BirthdateController = require("app/controllers/birthdate");
 
     return new BirthdateController(log, birthdateService, httpStatus);
 });
@@ -60,7 +60,7 @@ serviceLocator.register("userController", (serviceLocator) => {
     const log = serviceLocator.get("logger");
     const httpStatus = serviceLocator.get("httpStatus");
     const userService = serviceLocator.get("userService");
-    const UserController = require("app/controllers/User");
+    const UserController = require("app/controllers/user");
 
     return new UserController(log, userService, httpStatus);
 });

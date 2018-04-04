@@ -1,7 +1,7 @@
 'use strict';
 
 let httpStatus              = require('http-status');
-let errors                  = require('app/lib/errors/errors');
+let errors                  = require('restify-errors');
 
 /**
  * Header validation middleware definition
