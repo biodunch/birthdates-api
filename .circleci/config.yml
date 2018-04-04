@@ -35,6 +35,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install Heroku
+          command: bash .circleci/install_heroku.sh
+      - run:
           name: Deploy dev branch to Heroku
           command: |  # this command is framework-dependent and may vary
             heroku git:remote -a $HEROKU_APP_NAME
