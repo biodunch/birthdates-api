@@ -1,5 +1,5 @@
 {
-  "name": "body101",
+  "name": "birthdates-api",
   "version": "1.0.0",
   "description": "API for birth dates",
   "main": "server.js",
