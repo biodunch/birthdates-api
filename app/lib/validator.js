@@ -98,38 +98,3 @@ module.exports.paramValidation = function(log, joi) {
         next();
     };
 };
-
-
-/**
- * Header validation middleware definition
- *
- * @param log an instance of the console logger
- * @returns {Function} matching Restify middleware interface
- */
-module.exports.verifyToken = function(log) {
-
-    return function(req, res, next) {
-
-        let headerValidation = req.route.accept; //accept property in route
-
-        if (!headerValidation) {
-            return next(); // skip validation if not set
-        }
-
-        if (req.headers['content-type'].indexOf(req.route.accept) === 0) {
-            log.debug('request content-type correct - ', req.headers['content-type']);
-
-            return next();
-        } else {
-
-            log.error('request content-type incorrect - ', req.headers['content-type']);
-
-            res.send(
-                httpStatus.BAD_REQUEST,
-                new errors.InvalidContentTypeError(
-                    'Invalid content-type - expecting ' + req.route.accept
-                )
-            );
-        }
-    };
-};
